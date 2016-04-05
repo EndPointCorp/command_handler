@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>command_handler</name>
+  <version>0.0.0</version>
+  <description>The command_handler package</description>
+
+  <author email="jacob@endpoint.com">Jacob Minshall</author>
+  <maintainer email="galadmin@todo.todo">galadmin</maintainer>
+
+
+  <license>BSD</license>
+
+
+  <url type="website">http://github.com/EndPointCorp/command_handler</url>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>message_generation</build_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>rospy</run_depend>
+
+</package>
