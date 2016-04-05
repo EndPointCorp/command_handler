@@ -3,15 +3,19 @@ project(command_handler)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
+  message_generation
 )
 
 
+catkin_python_setup()
+
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  Command.msg
+)
+
+generate_messages()
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -34,12 +38,15 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES command_handler
-#  CATKIN_DEPENDS rospy
-#  DEPENDS system_lib
+  CATKIN_DEPENDS rospy message_runtime
 )
 
 include_directories(
   ${catkin_INCLUDE_DIRS}
+)
+
+catkin_install_python(PROGRAMS
+  scripts/launcher.py
+  scripts/launcher
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
