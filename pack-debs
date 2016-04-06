@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+set -e
+
+DIR=$( dirname "${BASH_SOURCE[0]}" )
+cd $DIR
+DIR=`pwd`
+
+BUILD='lg-ros-build'
+SRCDIR=$DIR/catkin/src
+DEBDIR=$DIR/catkin/debs
+ROSDISTRO=indigo
+
+./init_workspace.sh
+
+rm -rf $DEBDIR
+mkdir -p $DEBDIR
+cd $DEBDIR
+
+sudo rosdep init || /bin/true
+rosdep update
+sudo rosdep install -r -y --from-paths $SRCDIR --ignore-src \
+    --rosdistro=$ROSDISTRO --os=ubuntu:trusty
+
+function build() {
+  package=$1
+  $BUILD $SRCDIR/$package
+}
+
+function force_install() {
+  package=$1
+  sudo dpkg --force-overwrite -i ros-$ROSDISTRO-${package}_*.deb
+}
+
+function regular_install() {
+  package=$1
+  sudo dpkg -i ros-$ROSDISTRO-${package}_*.deb
+}
+
+function build_and_install() {
+  package=$1
+  build ${package}
+  regular_install ${package/_/-}
+}
+
+# first build and install dependencies
+build command_handler
