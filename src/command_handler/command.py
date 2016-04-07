@@ -20,7 +20,6 @@ class CommandHandler:
         commands = {}
         for section in config.sections():
             # ignore general section
-            print 'looking at section %s' % section
             if section == 'general':
                 continue
 
@@ -54,6 +53,7 @@ class CommandHandler:
                 print e
                 continue
 
+        print "Current commands are: %s" % commands
         return commands
 
 
@@ -76,7 +76,9 @@ class CommandHandler:
         rospy.loginfo('Run: ' + key)
         rospy.loginfo('Command: %s' % command)
 
-        p = Popen(command['execute'].split(), **kwargs)
-        p.wait()
+        for cmd in command['execute'].split(';'):
+            print 'running:', cmd
+            p = Popen(cmd.split(), **kwargs)
+            p.wait()
 
         rospy.loginfo('Done: ' + key)
