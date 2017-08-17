@@ -2,6 +2,11 @@
 Changelog for package command_handler
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* string based topic for command handler
+* Contributors: Jacob Minshall
+
 0.0.1 (2016-04-07)
 ------------------
 * iterate over commands split on semicolons
