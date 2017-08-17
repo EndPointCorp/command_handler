@@ -57,11 +57,22 @@ class CommandHandler:
         return commands
 
 
+    def command_string_msg(self, msg):
+        """
+        takes a std_msg/String
+        """
+        self.command_handler_wrapper(msg.data)
+
     def command_msg(self, msg):
+        """
+        takes a command_handler/Command
+        """
+        self.command_handler_wrapper(msg.command)
+
+    def command_handler_wrapper(self, key):
         """
         Find command by msg and run
         """
-        key = msg.command
         command = self.commands.get(key, None)
         if not command:
             rospy.loginfo('Command not found for key: (%s)' % key)

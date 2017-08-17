@@ -3,6 +3,7 @@
 import rospy, ConfigParser
 
 from command_handler.msg import Command
+from std_msgs.msg import String
 from command_handler import CommandHandler
 
 def main():
@@ -16,6 +17,7 @@ def main():
 
     handler = CommandHandler(config)
     rospy.Subscriber('/command', Command, handler.command_msg)
+    rospy.Subscriber('/command_string', String, handler.command_string_msg)
     rospy.spin()
 
 if __name__ == '__main__':
