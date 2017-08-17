@@ -2,8 +2,8 @@
 Changelog for package command_handler
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-08-18)
+------------------
 * string based topic for command handler
 * Contributors: Jacob Minshall
 
