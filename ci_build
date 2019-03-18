@@ -27,9 +27,9 @@ docker build --build-arg="BUILD_DEBS=true" \
   --pull --rm=true --force-rm --no-cache -t "${IMAGE_NAME}" .
 
 BUILD_SCRIPT='
-catkin_make install -DCMAKE_INSTALL_PREFIX=/opt/ros/indigo
+catkin_make install -DCMAKE_INSTALL_PREFIX=/opt/ros/melodic
 lg-ros-build src/command_handler
-mv ros-indigo-command-handler*.deb /output/
+mv ros-melodic-command-handler*.deb /output/
 '
 
 docker run --rm --name "${IMAGE_NAME}" \

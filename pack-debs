@@ -9,7 +9,7 @@ DIR=`pwd`
 BUILD='lg-ros-build'
 SRCDIR=$DIR/catkin/src
 DEBDIR=$DIR/catkin/debs
-ROSDISTRO=indigo
+ROSDISTRO=melodic
 
 ./init_workspace.sh
 
@@ -20,7 +20,7 @@ cd $DEBDIR
 sudo rosdep init || /bin/true
 rosdep update
 sudo rosdep install -r -y --from-paths $SRCDIR --ignore-src \
-    --rosdistro=$ROSDISTRO --os=ubuntu:trusty
+    --rosdistro=$ROSDISTRO --os=ubuntu:bionic
 
 function build() {
   package=$1

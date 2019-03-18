@@ -1,4 +1,4 @@
-FROM ros:indigo
+FROM ros:melodic
 MAINTAINER Matt Vollrath <matt@endpoint.com>
 ARG BUILD_DEBS='false'
 
@@ -29,7 +29,7 @@ RUN echo '#!/bin/bash' > /ros_entrypoint.sh \
 
 # Set up a catkin workspace complete with built run deps
 RUN mkdir -p $CATKIN_WS/src \
- && . /opt/ros/indigo/setup.sh \
+ && . /opt/ros/melodic/setup.sh \
  && catkin_init_workspace $CATKIN_WS/src \
  && git clone https://github.com/EndPointCorp/appctl /tmp/appctl \
  && git clone https://github.com/EndPointCorp/lg_ros_nodes /tmp/lg_ros_nodes \
@@ -42,21 +42,21 @@ RUN mkdir -p $CATKIN_WS/src \
  ;fi \
  && apt-get update \
  && rosdep update \
- && rosdep install -y --from-paths $CATKIN_WS/src --ignore-src --rosdistro=indigo \
+ && rosdep install -y --from-paths $CATKIN_WS/src --ignore-src --rosdistro=melodic \
  && rm -rf /var/lib/apt/lists/*
 
 # Install deps for this package
 COPY package.xml /tmp/$THIS_PROJECT
 RUN cd $CATKIN_WS \
- && . /opt/ros/indigo/setup.sh \
+ && . /opt/ros/melodic/setup.sh \
  && apt-get update \
- && rosdep install -y --from-paths /tmp/$THIS_PROJECT --ignore-src --rosdistro=indigo \
+ && rosdep install -y --from-paths /tmp/$THIS_PROJECT --ignore-src --rosdistro=melodic \
  && rm -rf /var/lib/apt/lists/*
 
 # Build this package
 COPY . $CATKIN_WS/src/$THIS_PROJECT
 RUN cd $CATKIN_WS \
- && . /opt/ros/indigo/setup.sh \
+ && . /opt/ros/melodic/setup.sh \
  && catkin_make
 
 WORKDIR $CATKIN_WS
