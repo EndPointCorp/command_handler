@@ -28,7 +28,7 @@ docker build --build-arg="BUILD_DEBS=true" \
 
 BUILD_SCRIPT='
 catkin_make install -DCMAKE_INSTALL_PREFIX=/opt/ros/melodic
-lg-ros-build src/command_handler
+lg-ros-build --ros_distro=melodic --os_version=bionic src/command_handler
 mv ros-melodic-command-handler*.deb /output/
 '
 
