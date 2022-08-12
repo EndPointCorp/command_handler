@@ -35,6 +35,7 @@ RUN mkdir -p $CATKIN_WS/src \
  && git clone https://github.com/EndPointCorp/lg_ros_nodes /tmp/lg_ros_nodes \
  && ln -snf /tmp/appctl $CATKIN_WS/src/ \
  && ln -snf /tmp/lg_ros_nodes/lg_common $CATKIN_WS/src/ \
+ && ln -snf /tmp/lg_ros_nodes/lg_msg_defs $CATKIN_WS/src/ \
  && ln -snf /tmp/lg_ros_nodes/interactivespaces_msgs $CATKIN_WS/src/ \
  && if [ "$BUILD_DEBS" = "true" ]; then \
     ln -snf /tmp/lg_ros_nodes/lg_builder $CATKIN_WS/src/ \
